@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  line-height: 0; }
+
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+body {
+  background-color: grey;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#scoreboard {
+  padding: 2vmin;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100vmin; }
+
+.hud {
+  text-align: center;
+  min-width: 18vmin;
+  box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.7);
+  display: inline-block;
+  font-family: 'Gamja Flower', cursive;
+  letter-spacing: 4px;
+  color: white;
+  font-size: calc(10px + 1vmin);
+  border: 2px solid white;
+  border-radius: 20%;
+  background-color: rgba(0,0,0,0.7);
+  padding: 1.8vmin 2vmin 1.6vmin 2vmin; }
