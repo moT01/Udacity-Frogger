@@ -3,6 +3,7 @@
   //responsive size
 //enemy speed based on window size
 //add some animation/fun
+//sounds
 //look into moving the player -> drawing the player -> checking collisions
 //subtract score for deaths
 //player collision with water/rocks etc...
