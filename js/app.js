@@ -1,12 +1,12 @@
 //TO DO
-//window.resize
-  //responsive size
 //enemy speed based on window size
 //add some animation/fun
 //sounds
 //look into moving the player -> drawing the player -> checking collisions
 //subtract score for deaths
 //player collision with water/rocks etc...
+//controls for phone/touch
+//more/better levels
 
 //global variables //global variables //global variables //global variables //global variables //global variables
 //elements
@@ -135,13 +135,7 @@ function Enemy() {
   this.rightEdge = this.x+cellWidth;
   this.checkIfCollide = function() {
     if(player.y === this.y && (this.rightEdge >= player.leftEdge && this.x <= player.rightEdge)) {
-      deaths++;
-      if(score>=50) {
-        score-=50;
-      } else {
-        score = 0;
-      }
-      updateHUD();
+      player.death();
       player.backToStart();
     }
   }
@@ -181,22 +175,36 @@ function Player() {
     this.leftEdge = this.x + playerLeftEdge;
     this.rightEdge = this.x + playerRightEdge;
   }
+  this.death = function() {
+    deaths++;
+    if(score>=50) {
+      score-=50;
+    } else {
+      score = 0;
+    }
+    updateHUD();
+  }
   this.movePlayer = function(x, y) {
-    //if not an obstacle
-    if(board[player.y+y][player.x+x]) {
-      //keep player in game board
-      if(!(this.x + x > cols-1) && !(this.x + x < 0)) {
-        this.x += x;
-        this.leftEdge = this.x * cellWidth + playerLeftEdge;
-        this.rightEdge = this.x * cellWidth + playerRightEdge;
-      }
-      if(!(this.y + y > rows-1) && !(this.y + y < 0)) {
-        this.y += y;
-      }
+    //if water
+    if(!board[player.y+y][player.x+x]) {
+      new Audio('./sounds/splash2.wav').play();
+      player.death();
+      player.backToStart();
+    }
 
-      if(this.y === 0) {
-        levelWon();
-      }
+
+    //keep player in game board
+    if(!(this.x + x > cols-1) && !(this.x + x < 0)) {
+      this.x += x;
+      this.leftEdge = this.x * cellWidth + playerLeftEdge;
+      this.rightEdge = this.x * cellWidth + playerRightEdge;
+    }
+    if(!(this.y + y > rows-1) && !(this.y + y < 0)) {
+      this.y += y;
+    }
+
+    if(this.y === 0) {
+      levelWon();
     }
   }
 }
